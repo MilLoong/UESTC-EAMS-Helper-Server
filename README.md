@@ -68,6 +68,8 @@
 - **状态目录：** `.local-dev/` 保存密钥、数据库与绑定状态，不要删除或公开，不要将管理端口暴露到公网
 - **隧道信任：** Cloudflare 终止 HTTPS，可接触绑定凭据、课程与通知数据，临时隧道仅用于可信测试
 - **更新生效：** 修改服务端代码后重启进程，临时公网地址可能变化
+- **固定 HTTPS 地址：** 复制 `.env.example` 为 `.env`，设置 `EAMS_PUBLIC_URL`、`EAMS_STATE_DIR` 和 `EAMS_PORT`，可使用 `python -m uvicorn server.cloud:from_env --factory --env-file .env --host 127.0.0.1 --port 18080 --workers 1 --no-proxy-headers` 启动，监听端口需与 `EAMS_PORT` 一致
+- **反向代理：** 只公开 `/health`、`/devices/pair`、`/devices/me` 及其 `courses`、`reminders`、`mode`、`events` 子路径，将上游 `Host` 设置为 `127.0.0.1:18080`，管理页 `/dev/pair` 和 `/admin/` 仅经 SSH 转发访问，不对公网开放
 - **运行测试：** 使用虚拟环境中的 Python 执行
   - 如下：
 

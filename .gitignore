@@ -11,6 +11,8 @@ htmlcov/
 coverage.xml
 data/
 .local-dev/
+# One-off deployment artifact, not a reusable installer.
+/scripts/deploy-tencent.sh
 .env
 .env.*
 !.env.example
